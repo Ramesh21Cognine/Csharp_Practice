@@ -1,83 +1,58 @@
 ﻿using System;
 using System.Collections;
 
-namespace queue
+namespace stackex
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Queue que = new Queue();
-            que.Enqueue("Welcome");
-            que.Enqueue("to");
-            que.Enqueue("stack");
-            que.Enqueue("programs");
-            que.Enqueue("as well");
-            que.Enqueue(20.5f);
-            que.Enqueue(10);
-            que.Enqueue(100);
-            PrintValues(que);
-            Console.WriteLine(que.IsSynchronized);//its synchronized its true otheerwise false
+            // Creates and initializes a new Stack.
+            Stack myStack = new Stack();
+            myStack.Push("Hello");
+            myStack.Push("World");
+            myStack.Push("!");
 
-            Console.WriteLine("Count:    {0}", que.Count);  //count the number of elements in queue
+            // Displays the properties and values of the Stack.
+            Console.WriteLine("myStack");
+            Console.WriteLine("\tCount:    {0}", myStack.Count);
+            Console.Write("\tValues:");
+            PrintValues(myStack);
 
-            //cone the queue 
-            Queue que2 = (Queue)que.Clone();
-            Console.WriteLine("**********************que2************************");
-            PrintValues(que2);
-
-            //contains method
-            Console.WriteLine(que2.Contains("programs"));//it contains it will return true otherwise false
-
-            //Queue copyto array
-            Console.WriteLine("copy queue into array");
-            Object[] myStandardArray = que.ToArray();
-            PrintValues(myStandardArray, ' ');
-            Console.WriteLine(myStandardArray.GetType());
-            Console.WriteLine(myStandardArray);
-
-
-            Console.WriteLine("*********************Dequeue and Enqueue**************************** ");
-            PrintValues(que2);
-            var v=que2.Dequeue();
-            PrintValues(que2);
-            que2.Enqueue(v);
-            PrintValues(que2);
-
-
-            Console.WriteLine("*************peek************");
-            Console.WriteLine(que2.Peek());
-            PrintValues(que2);
-
-
-            Console.WriteLine("********************clear******************");
-            que2.Clear();
-            Console.WriteLine("count of the queue {0}  ",que2.Count);
-            PrintValues(que2);
-            
-
-            Console.WriteLine("hash code of program {0}",que2.Contains(100).GetHashCode());
-           
-            
-
-
-        }
-        //printing the values of queue
-        public static void PrintValues(IEnumerable myCollection)
-        {
-            foreach (Object obj in myCollection)
-                Console.Write("    {0}", obj);
-            Console.WriteLine();
-        }
-
-        //printing the values of array
-        public static void PrintValues(Array myArr, char mySeparator)
-        {
-            foreach (Object myObj in myArr)
+            Console.WriteLine(myStack.Contains("Hello"));
+            Console.WriteLine(myStack.Peek());
+            var popp = myStack.Pop();
+            Console.WriteLine(popp);
+            Console.WriteLine(myStack.GetType());
+            Console.WriteLine("*****get every element *****tostring ********  type  ******* hashcode*******  ");
+            foreach ( object ss in myStack)
             {
-                Console.Write("{0}{1}", mySeparator, myObj);
+                Console.WriteLine(ss.ToString());
+                Console.WriteLine(ss.GetType());
+                Console.WriteLine(ss.GetHashCode());
+
             }
-            Console.WriteLine();
+            Stack stackcopy = (Stack)myStack.Clone();
+            Console.WriteLine("**************Cloned stack**********");
+            PrintValues(stackcopy);
+
+            Console.WriteLine($"enmuerator {myStack.GetEnumerator()}");
+            Console.WriteLine($"type  {myStack.GetType()}");
+            Console.WriteLine($"Peek  {myStack.Peek()}");
+            Console.WriteLine($"POP   {myStack.Pop()}");
+            PrintValues(myStack);
+            myStack.Clear();
+            Console.WriteLine("cleared the my stack");
+            myStack.Push("cleared stack");
+            PrintValues(myStack);
+
+           
         }
+
+   public static void PrintValues( IEnumerable myCollection )  {
+      foreach ( Object obj in myCollection )
+         Console.Write( "    {0}", obj );
+      Console.WriteLine();
+   }
     }
 }
