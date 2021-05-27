@@ -1,58 +1,68 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 
-namespace stackex
+namespace Dictionary
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // Creates and initializes a new Stack.
-            Stack myStack = new Stack();
-            myStack.Push("Hello");
-            myStack.Push("World");
-            myStack.Push("!");
-
-            // Displays the properties and values of the Stack.
-            Console.WriteLine("myStack");
-            Console.WriteLine("\tCount:    {0}", myStack.Count);
-            Console.Write("\tValues:");
-            PrintValues(myStack);
-
-            Console.WriteLine(myStack.Contains("Hello"));
-            Console.WriteLine(myStack.Peek());
-            var popp = myStack.Pop();
-            Console.WriteLine(popp);
-            Console.WriteLine(myStack.GetType());
-            Console.WriteLine("*****get every element *****tostring ********  type  ******* hashcode*******  ");
-            foreach ( object ss in myStack)
+            // Create a dictionary with string key and Int16 value pair    
+            Dictionary<string, Int16> AuthorList = new Dictionary<string, Int16>();
+            AuthorList.Add("Mahesh Chand", 35);
+            AuthorList.Add("Mike Gold", 25);
+            AuthorList.Add("Praveen Kumar", 29);
+            AuthorList.Add("Raj Beniwal", 21);
+            AuthorList.Add("Dinesh Beniwal", 84);
+            // Count    
+            Console.WriteLine("Count: {0}", AuthorList.Count);
+            // Set Item value    
+            AuthorList["Neel Beniwal"] = 9;
+            if (AuthorList.ContainsKey("Mahesh Chand"))
             {
-                Console.WriteLine(ss.ToString());
-                Console.WriteLine(ss.GetType());
-                Console.WriteLine(ss.GetHashCode());
-
+                AuthorList["Mahesh Chand"] = 20;
             }
-            Stack stackcopy = (Stack)myStack.Clone();
-            Console.WriteLine("**************Cloned stack**********");
-            PrintValues(stackcopy);
+            if (AuthorList.ContainsValue(9))
+            {
+                Console.WriteLine("Item found");
+            }
+            else
+            {
+                Console.WriteLine("iteam not found");
+            }
 
-            Console.WriteLine($"enmuerator {myStack.GetEnumerator()}");
-            Console.WriteLine($"type  {myStack.GetType()}");
-            Console.WriteLine($"Peek  {myStack.Peek()}");
-            Console.WriteLine($"POP   {myStack.Pop()}");
-            PrintValues(myStack);
-            myStack.Clear();
-            Console.WriteLine("cleared the my stack");
-            myStack.Push("cleared stack");
-            PrintValues(myStack);
+            //Read all items 
+            Console.WriteLine("Authors all items:");
+            Console.WriteLine("-------------------- ");
+            foreach (KeyValuePair<string, Int16> author in AuthorList)
+            {
+                Console.WriteLine("Key: {0}, Value: {1}",
+                author.Key, author.Value);
+            }
 
-           
+            Console.WriteLine();
+
+            //remove the key and value by useing the key value
+            AuthorList.Remove("Dinesh Beniwal");
+
+
+            // after removing the key value  
+            Console.WriteLine("after remove the Dinesh Beniwal ");
+            Console.WriteLine("----------------------------------");
+            foreach (KeyValuePair<string, Int16> author in AuthorList)
+            {
+                Console.WriteLine("Key: {0}, Value: {1}",
+                author.Key, author.Value);
+            }
+        
+
+            // Remove all items    
+            AuthorList.Clear();
+
+            //count after clear the Dictionary
+            Console.WriteLine("Count: {0}", AuthorList.Count);
+
+
         }
-
-   public static void PrintValues( IEnumerable myCollection )  {
-      foreach ( Object obj in myCollection )
-         Console.Write( "    {0}", obj );
-      Console.WriteLine();
-   }
     }
 }
